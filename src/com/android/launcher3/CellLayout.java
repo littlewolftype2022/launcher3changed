@@ -94,6 +94,7 @@ public class CellLayout extends ViewGroup {
 
     // These are temporary variables to prevent having to allocate a new object just to
     // return an (x, y) value from helper functions. Do NOT use them to maintain other state.
+    // 这些是临时变量，可以防止为了从辅助函数返回（x，y）值而分配新对象。不要用它们来维持其他状态。
     @Thunk final int[] mTmpPoint = new int[2];
     @Thunk final int[] mTempLocation = new int[2];
 
@@ -111,14 +112,19 @@ public class CellLayout extends ViewGroup {
     private final Drawable mBackground;
 
     // These values allow a fixed measurement to be set on the CellLayout.
+    // 这些值允许在CellLayout上设置固定的测量值。
     private int mFixedWidth = -1;
     private int mFixedHeight = -1;
 
-    // If we're actively dragging something over this screen, mIsDragOverlapping is true
+    // If we're actively dragging something over this screen, mIsDragOverlapping is true.
+    // 如果我们在这个屏幕上主动拖动某个东西，mIsDragOverlapping是真值
     private boolean mIsDragOverlapping = false;
 
     // These arrays are used to implement the drag visualization on x-large screens.
     // They are used as circular arrays, indexed by mDragOutlineCurrent.
+    // 这些数组用于在x大屏幕上实现拖动可视化。
+    //
+    ////它们被用作循环数组，由mDragOutlineCurrent进行索引。
     @Thunk final Rect[] mDragOutlines = new Rect[4];
     @Thunk final float[] mDragOutlineAlphas = new float[mDragOutlines.length];
     private final InterruptibleInOutAnimator[] mDragOutlineAnims =
@@ -134,6 +140,7 @@ public class CellLayout extends ViewGroup {
     private boolean mItemPlacementDirty = false;
 
     // When a drag operation is in progress, holds the nearest cell to the touch point
+    // 当拖动操作正在进行时，按住离触摸点最近的单元格
     private final int[] mDragCell = new int[2];
 
     private boolean mDragging = false;
@@ -193,7 +200,8 @@ public class CellLayout extends ViewGroup {
         a.recycle();
 
         // A ViewGroup usually does not draw, but CellLayout needs to draw a rectangle to show
-        // the user where a dragged item will land when dropped.
+        // the user where a dragged item will land when dropped.ViewGroup
+        // 通常不绘制，但CellLayout需要绘制一个矩形，以向用户显示拖动的项目在放置时将落在哪里。
         setWillNotDraw(false);
         setClipToPadding(false);
         mLauncher = Launcher.getLauncher(context);
@@ -224,6 +232,7 @@ public class CellLayout extends ViewGroup {
         mReorderPreviewAnimationMagnitude = (REORDER_PREVIEW_MAGNITUDE * grid.iconSizePx);
 
         // Initialize the data structures used for the drag visualization.
+        // 初始化用于拖动可视化的数据结构。
         mEaseOutInterpolator = Interpolators.DEACCEL_2_5; // Quint ease out
         mDragCell[0] = mDragCell[1] = -1;
         for (int i = 0; i < mDragOutlines.length; i++) {
@@ -235,6 +244,9 @@ public class CellLayout extends ViewGroup {
         // where the item will land. The outlines gradually fade out, leaving a trail
         // behind the drag path.
         // Set up all the animations that are used to implement this fading.
+        // 当在主屏幕上拖动东西时，我们会显示一个项目将落在哪里的绿色轮廓。
+        // 轮廓逐渐淡出，在拖动路径后面留下一条轨迹。
+        // 设置用于实现此淡入淡出的所有动画。
         final int duration = res.getInteger(R.integer.config_dragOutlineFadeTime);
         final float fromAlphaValue = 0;
         final float toAlphaValue = (float)res.getInteger(R.integer.config_dragOutlineMaxAlpha);

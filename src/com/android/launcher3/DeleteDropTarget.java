@@ -28,7 +28,7 @@ import com.android.launcher3.logging.LoggerUtils;
 import com.android.launcher3.userevent.nano.LauncherLogProto.ControlType;
 import com.android.launcher3.userevent.nano.LauncherLogProto.Target;
 
-public class DeleteDropTarget extends ButtonDropTarget {
+public class DeleteDropTarget extends ButtonDropTarget {//从ButtonDT继承
 
     private int mControlType = ControlType.DEFAULT_CONTROLTYPE;
 

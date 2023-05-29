@@ -53,7 +53,11 @@ public class PopupDataProvider implements NotificationListener.NotificationsChan
     private static final SystemShortcut[] SYSTEM_SHORTCUTS = new SystemShortcut[] {
             new SystemShortcut.AppInfo(),
             new SystemShortcut.Widgets(),
-            new SystemShortcut.Install()
+            new SystemShortcut.Install(),
+            new SystemShortcut.DeleteAPP(),
+            new SystemShortcut.ShareAPP()
+
+            //ZAI！ZHELI！JIARU！DIANJIHOU！DE！TANCHU！CAIDAN！这里可以点击长按后唤出菜单。
     };
 
     private final Launcher mLauncher;
@@ -127,6 +131,7 @@ public class PopupDataProvider implements NotificationListener.NotificationsChan
         }
 
         // Add and remove from updatedBadges so it contains the PackageUserKeys of updated badges.
+        // 从updatedBadges中添加和删除，使其包含已更新徽章的PackageUserKeys。
         for (PackageUserKey packageUserKey : mPackageUserToBadgeInfos.keySet()) {
             BadgeInfo prevBadge = updatedBadges.get(packageUserKey);
             BadgeInfo newBadge = mPackageUserToBadgeInfos.get(packageUserKey);
@@ -184,6 +189,7 @@ public class PopupDataProvider implements NotificationListener.NotificationsChan
     }
 
     /** This makes a potentially expensive binder call and should be run on a background thread. */
+    /** 这可能会产生一个昂贵的绑定器调用，并且应该在后台线程上运行*/
     public @NonNull List<StatusBarNotification> getStatusBarNotificationsForKeys(
             List<NotificationKeyData> notificationKeys) {
         NotificationListener notificationListener = NotificationListener.getInstanceIfConnected();

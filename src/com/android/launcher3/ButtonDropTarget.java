@@ -52,6 +52,11 @@ import com.android.launcher3.util.Thunk;
 /**
  * Implements a DropTarget.
  */
+/**
+
+ *实现删除目标。
+
+ */
 public abstract class ButtonDropTarget extends TextView
         implements DropTarget, DragController.DragListener, OnClickListener {
 
@@ -68,13 +73,17 @@ public abstract class ButtonDropTarget extends TextView
     protected DropTargetBar mDropTargetBar;
 
     /** Whether this drop target is active for the current drag */
+    /** 此放置目标对于当前拖动是否处于活动状态*/
     protected boolean mActive;
     /** Whether an accessible drag is in progress */
+    /**是否正在进行可访问的拖动*/
     private boolean mAccessibleDrag;
     /** An item must be dragged at least this many pixels before this drop target is enabled. */
+    /**在启用此放置目标之前，项目必须至少拖动这么多像素*/
     private final int mDragDistanceThreshold;
 
     /** The paint applied to the drag view on hover */
+    /**悬停时应用于拖动视图的绘制*/
     protected int mHoverColor = 0;
 
     protected CharSequence mText;
@@ -232,7 +241,7 @@ public abstract class ButtonDropTarget extends TextView
             mCurrentColorAnim = null;
         }
         setTextColor(mOriginalTextColor);
-        setVisibility(mActive ? View.VISIBLE : View.GONE);
+        setVisibility(mActive ? View.VISIBLE : View.GONE);//在这里应该是删除视图的位置，viewgone了。
 
         mAccessibleDrag = options.isAccessibleDrag;
         setOnClickListener(mAccessibleDrag ? this : null);
